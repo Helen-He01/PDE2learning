@@ -1,0 +1,31 @@
+#cache().disable_shared() #禁止共享缓存
+#cache().set_cache_dir("xxx") #设置缓存目录
+
+#创建一个空字典用于记录各步骤的执行时间
+#记录脚本开始执行的时间点
+timing_record = {}
+starttime = datetime.datetime.now()
+
+#读取数据并存储
+(timing_record,load_data_time) = pde_custom_read_design();
+
+#执行引脚对齐的主要处理程序
+pde_custom_pin_align_main_proc('padlet_pin_alignment.file')
+
+#some commands
+-app nodocker: 不使用Docker容器
+--projectMode direct: 直接模式项目
+-q pnr_interactive: 使用交互式布局布线(PNR)队列
+-m rel75: 使用rel75软件版本/环境
+-P gpu_gh100_vlsi_pnr: 指定项目(GH100 GPU的VLSI布局布线)
+-N -I: 交互式作业标记
+#可以创建调整大小可滚动支持选项卡的窗口界面
+/home/utils/bin/gnome-terminal: 启动图形化终端
+-q o_cpu_128G: 请求128GB内存的CPU资源
+&: 在后台运行
+
+#启动pde2,不需要ls
+路径比如：/home/pde2
+
+
+
