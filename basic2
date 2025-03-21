@@ -1,0 +1,74 @@
+#首先进入自己的文件夹
+cd /home/pandr_intern/hhelen
+
+#由于目前只有pde2印次直接查询目前所有路径下的文件
+ls /home/bin/
+
+#案例查看
+ls  /home/pandr_intern/HFP_golden_scripts
+
+#打开上一步中的其中一个文件,vim是打开vim编辑器在图形窗口中运行
+gvim  /home/pandr_intern/HFP_golden_scripts/how_to_feedthrough_and_alignPin_in_PDE2.py
+
+#打开pde2
+/home/bin/PDE2_Shell
+
+#在pde2中使用help--两种方式，一种具体查找，一种模糊查找
+PDE2_Shell> help(get_cell)
+PDE2_Shell> help("*get_cell*")
+
+#需要查找当前路径
+pwd()
+
+#打开一个新的queue
+#调用图形编辑器自动生成当前job编号并开启queue
+/home/bin/qsub -app nodocker --projectMode direct -q pnr_interactive -m rel75 -P gpu_gh100_vlsi_pnr -N -I /home/utils/bin/gnome-terminal -q o_cpu_128G &
+
+#pde2运行后生成的各种报告文件
+#汇总所有输入文件错误，运行后必须检查此文件
+pde_custom_read_design_warning_error_collection.rpt
+#汇报三类不匹配错误
+#当前库中模拟/PAD/宏单元新增加的输入引脚
+#未定义的模拟/PAD/宏单元
+#当前库中被移除的模拟/PAD/宏单元引脚
+analog_pad_macro.input_floating_pin.rpt
+
+#列出浮动网络 没有被完全连接的网络，PDE HFP流程会为这些网络将布线阻塞下推到padlet/分区级别
+#pde会自动布线阻塞隔绝浮动区域包含顶层设计组织信号布线通过以及底层物理/逻辑以及I/O边缘的阻塞
+floating_net.txt
+
+#检查是否有任何意外的未放置引脚
+*_unplaced.filtered.port
+
+#检查是否有违反DRC规则
+Check_Pin_DRC_Error_*At*.rpt.filtered
+
+#./LOG目录和关键文件说明
+#记录每个分区(partition)/padlet的连接信息
+padlet_edge.file
+
+#read a script
+PDE2_Shell> source("my_pde_script_file.py")
+
+#新建一个文本
+touch filename
+vim filename
+
+#查找存储alias路径
+vi ~/.cshrc_custom
+cat ~/.cs
+#然后进入cs下的文件
+cat ~/.cshrc_custom
+
+#启动PDE2_shell运行source
+#首先进入hhelen/pde2
+#然后/home/bin/PDE2_Shell
+
+
+
+
+
+
+
+
+
